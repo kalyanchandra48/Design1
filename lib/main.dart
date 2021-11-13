@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'popular.dart';
+import 'island.dart';
 void main() {
   runApp(
     MaterialApp(
@@ -9,7 +10,12 @@ void main() {
   );
 }
 
-class FirstDesign extends StatelessWidget {
+class FirstDesign extends StatefulWidget {
+  @override
+  _FirstDesignState createState() => _FirstDesignState();
+}
+
+class _FirstDesignState extends State<FirstDesign> {
   List<Color> colors = [
     Colors.red,
     Colors.grey,
@@ -17,12 +23,21 @@ class FirstDesign extends StatelessWidget {
     Colors.black,
     Colors.red
   ];
+  List<Color> iconColors = [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+  ];
   List<String> images = [
     'assets/panormico.webp',
     'assets/ledras.jpeg',
     'assets/lious.jpeg',
     'assets/final.jpeg'
   ];
+
   List<String> hotelName = [
     'Madeiro panormico',
     'Ledras Hotel',
@@ -32,11 +47,14 @@ class FirstDesign extends StatelessWidget {
   List<String> rating = ['4.2', '3.4', '4.5', '4.6'];
   List<String> subHotel = ['Maiero', 'Liorus ls', 'kalyan', 'joshua'];
   List<IconData> icons = [
-    Icons.favorite_border,
-    Icons.favorite_border,
-    Icons.favorite_border,
-    Icons.favorite_border
+    Icons.favorite,
+    Icons.favorite,
+    Icons.favorite,
+    Icons.favorite
   ];
+  Color borderColor = Colors.transparent;
+  Color roundColor = Colors.transparent;
+  Color boxColor = Colors.transparent;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,20 +67,17 @@ class FirstDesign extends StatelessWidget {
               height: 14,
               width: 24,
             ),
-            
-			    
-              
-               Padding(
-                padding: EdgeInsets.only(top: 8, bottom: 8),
-                child:CircleAvatar(
-		backgroundColor:Colors.black,		
-				child: Icon(
+            Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              child: CircleAvatar(
+                backgroundColor: Colors.black,
+                child: Icon(
                   Icons.home,
                   color: Colors.white,
                   size: 28,
-                ),),
+                ),
               ),
-            
+            ),
             SizedBox(
               width: 50,
             ),
@@ -132,13 +147,11 @@ class FirstDesign extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    //	  Icon(Icons.search),
                     padding: EdgeInsets.symmetric(
                       horizontal: 0,
                     ),
                     child: TextField(
                       cursorColor: Colors.black,
-                      //prefixIcon::	Icon(Icons.search),
                       decoration: InputDecoration(
                         prefixIcon: Padding(
                           padding: EdgeInsets.only(
@@ -191,10 +204,16 @@ class FirstDesign extends StatelessWidget {
                 SizedBox(
                   width: 160,
                 ),
-                Container(
-                    height: 20,
-                    width: 20,
-                    child: Icon(Icons.arrow_forward_ios)),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Popular()));
+                  },
+                  child: Container(
+                      height: 20,
+                      width: 20,
+                      child: Icon(Icons.arrow_forward_ios)),
+                ),
               ],
             ),
           ),
@@ -210,29 +229,39 @@ class FirstDesign extends StatelessWidget {
               padding: EdgeInsets.only(left: 12),
               scrollDirection: Axis.horizontal,
               children: [
-                Container(
-                  height: 90,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/Amsterdam.jpg'),
-                      fit: BoxFit.fill,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      borderColor == Colors.yellow
+                          ? borderColor = Colors.transparent
+                          : borderColor = Colors.yellow;
+                    });
+                  },
+                  child: Container(
+                    height: 90,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/Amsterdam.jpg'),
+                        fit: BoxFit.fill,
+                      ),
+                      border: Border.all(color: borderColor, width: 6),
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
                     ),
-                    color: Colors.yellow,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Amsterdam',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white,
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'Amsterdam',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -240,25 +269,35 @@ class FirstDesign extends StatelessWidget {
                 SizedBox(
                   width: 20,
                 ),
-                Container(
-                  height: 90,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    image: DecorationImage(
-                      image: AssetImage('assets/city.png'),
-                      fit: BoxFit.fill,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      roundColor == Colors.yellow
+                          ? roundColor = Colors.transparent
+                          : roundColor = Colors.yellow;
+                    });
+                  },
+                  child: Container(
+                    height: 90,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/city.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      border: Border.all(color: roundColor, width: 6),
                     ),
-                  ),
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Berlin',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white,
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'Berlin',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -266,28 +305,38 @@ class FirstDesign extends StatelessWidget {
                 SizedBox(
                   width: 20,
                 ),
-                Container(
-                  height: 90,
-                  width: 150,
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Krakova',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      boxColor == Colors.yellow
+                          ? boxColor = Colors.transparent
+                          : boxColor = Colors.yellow;
+                    });
+                  },
+                  child: Container(
+                    height: 90,
+                    width: 150,
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'Krakova',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                    image: DecorationImage(
-                      image: AssetImage('assets/Berlin.jpeg'),
-                      fit: BoxFit.fill,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage('assets/Berlin.jpeg'),
+                        fit: BoxFit.fill,
+                      ),
+                      border: Border.all(color: boxColor, width: 6),
                     ),
                   ),
                 ),
@@ -311,8 +360,19 @@ class FirstDesign extends StatelessWidget {
                 SizedBox(
                   width: 204,
                 ),
-                Container(
-                  child: Icon(Icons.arrow_forward_ios),
+                GestureDetector(
+                  onTap: () {
+                    setState(() 
+				    {
+ Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Island()));
+
+
+				    });
+                  },
+                  child: Container(
+                    child: Icon(Icons.arrow_forward_ios),
+                  ),
                 ),
               ],
             ),
@@ -342,24 +402,37 @@ class FirstDesign extends StatelessWidget {
                             top: 12,
                             right: 12,
                           ),
-                          child: Align(
-                            child: Icon(icons[i]),
-                            alignment: Alignment.topRight,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                iconColors[i] == Colors.black
+                                    ? iconColors[i] = Colors.white
+                                    : iconColors[i] = Colors.black;
+                              });
+                            },
+                            child: Align(
+                              child: Icon(
+                                icons[i],
+                                color: iconColors[i],
+                              ),
+                              alignment: Alignment.topRight,
+                            ),
                           ),
                         ),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(images[i]),
-                            //Icon(Icons.icons[i]),
                             fit: BoxFit.fill,
-                            //Icon(Icons.icons[i]),
                           ),
                           borderRadius: BorderRadius.all(
                             Radius.circular(15),
                           ),
                           color: colors[i],
                         ),
-                      ),SizedBox(height:4,),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
